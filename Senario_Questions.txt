@@ -1,0 +1,89 @@
+1. Create the students table with student_id as the PRIMARY KEY and student_name as NOT NULL.
+ ANS : Create table students(Student_id int PRIMARY KEY , student_name varchar(15) NOT NULL, city varchar(10));
+
+2. Insert 5 students records into the students table.
+ANS : Insert into students(student_id ,student_name , city) values (101, 'Ram', 'pune'),(102,'Seeta','Nashik'),(103,'Geeta','Mumbai'),(104,'Mahesh','Kolkata'),(105,'Raaj','Goa');
+
+3. Display all records from the students table.
+ANS : select * from students;
+
+4. Display only the student_name, city, and marks columns.
+select student_name,city,marks from students;
+
+5. A student with ID 3 has received 5 additional marks. Update the student's marks.
+Update students set marks = marks + 5  where student_id =3;
+
+6. A student with ID 5 has left the college. Delete that student's record.
+Delete from students where student_id = 5;
+
+7. Create a new courses table containing course_id, course_name, and fees. Make course_id a PRIMARY KEY.
+create table courses(course_id int PRIMARY KEY ,course_name varchar(15), fees int);
+
+8. Modify the student table so that email must be UNIQUE.
+alter table students modify email varchar(30) UNIQUE;
+
+9. Create a student table where age must be at least 18 using a CHECK constraint.
+create table student(Id int, name varchar(15), city varchar(10), age int CHECK(age>=18));
+
+10. Create a student table where the default value of city is 'Pune'.
+create table student(Id int, name varchar(15), city varchar(10) DEFAULT 'pune', age int);
+
+11. Create an employees table using appropriate INT, VARCHAR, DECIMAL, DATE, and CHAR data types.
+create table employees(emp_id int, emp_name varchar(15), gender char, DOB date, salary decimal);
+
+12. Find students who scored more than 75 marks using a comparison operator.
+ select * from students where marks > 75;
+
+13. Find students whose age is greater than or equal to 20 AND marks are greater than 70.
+select * from students where age >= 20 AND marks > 70;
+
+14. Find students who are from Pune OR Mumbai.
+select * from students where city='pune' OR city='mumbai';
+
+15. Find students who are NOT from Delhi.
+select * from students where NOT city='Delhi';
+
+16. Find students whose marks are between 60 and 90 using BETWEEN.
+select * from students where marks BETWEEN 60 AND 90;
+
+17. Find students who belong to Pune, Mumbai, or Delhi using IN.
+select * from students where city IN ('pune','mumbai','delhi');
+
+18. Find students whose names start with the letter 'A' using LIKE.
+select * from students where name LIKE '%A';
+
+19. Display students whose marks are greater than 50 using the WHERE clause.
+select * from students where marks > 50;
+
+20. Display all students sorted from highest marks to lowest marks using ORDER BY.
+select *  from students order by marks DESC;
+
+21. Find students whose marks are not equal to 50 using a comparison operator.
+ANS : select * from students where marks <> 50;
+
+22. Find students whose age is between 18 and 25 using BETWEEN.
+ANS : select * from students where age BETWEEN 18 AND 25;
+
+23. Display the first 5 students using LIMIT.
+ANS : select * from students LIMIT 5;
+
+24. Skip the first 5 students and display the next 5 using LIMIT and OFFSET.
+ANS : select * from students LIMIT 5 OFFSET 5;
+
+25. Find the total number of students using COUNT().
+ANS : Select COUNT(*) from students;
+
+26. Find the total marks of all students using SUM().
+ANS : Select sum(marks) from students;
+
+27. Find the average marks using AVG().
+ANS : Select AVG(marks) from students;
+
+28. Find the highest marks using MAX().
+ANS : Select MAX(marks) from students;
+
+29. Find the lowest marks using MIN().
+ANS : Select MIN(marks) from students;
+
+30.Find the total number of students who scored more than 75 marks using COUNT() and WHERE.
+ANS : Select COUNT(*) from students where marks > 75;
