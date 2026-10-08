@@ -1,0 +1,134 @@
+1. Create the students table with student_id as the PRIMARY KEY and student_name as NOT NULL.
+ ANS : Create table students(Student_id int PRIMARY KEY , student_name varchar(15) NOT NULL, city varchar(10));
+
+2. Insert 5 students records into the students table.
+ANS : Insert into students(student_id ,student_name , city) values (101, 'Ram', 'pune'),(102,'Seeta','Nashik'),(103,'Geeta','Mumbai'),(104,'Mahesh','Kolkata'),(105,'Raaj','Goa');
+
+3. Display all records from the students table.
+ANS : select * from students;
+
+4. Display only the student_name, city, and marks columns.
+ANS : select student_name,city,marks from students;
+
+5. A student with ID 3 has received 5 additional marks. Update the student's marks.
+ANS : Update students set marks = marks + 5  where student_id =3;
+
+6. A student with ID 5 has left the college. Delete that student's record.
+ANS : Delete from students where student_id = 5;
+
+7. Create a new courses table containing course_id, course_name, and fees. Make course_id a PRIMARY KEY.
+ANS : create table courses(course_id int PRIMARY KEY ,course_name varchar(15), fees int);
+
+8. Modify the student table so that email must be UNIQUE.
+ANS : alter table students modify email varchar(30) UNIQUE;
+
+9. Create a student table where age must be at least 18 using a CHECK constraint.
+ANS : create table student(Id int, name varchar(15), city varchar(10), age int CHECK(age>=18));
+
+10. Create a student table where the default value of city is 'Pune'.
+ANS : create table student(Id int, name varchar(15), city varchar(10) DEFAULT 'pune', age int);
+
+11. Create an employees table using appropriate INT, VARCHAR, DECIMAL, DATE, and CHAR data types.
+ANS : create table employees(emp_id int, emp_name varchar(15), gender char, DOB date, salary decimal);
+
+12. Find students who scored more than 75 marks using a comparison operator.
+ANS : select * from students where marks > 75;
+
+13. Find students whose age is greater than or equal to 20 AND marks are greater than 70.
+ANS : select * from students where age >= 20 AND marks > 70;
+
+14. Find students who are from Pune OR Mumbai.
+ANS : select * from students where city='pune' OR city='mumbai';
+
+15. Find students who are NOT from Delhi.
+ANS : select * from students where NOT city='Delhi';
+
+16. Find students whose marks are between 60 and 90 using BETWEEN.
+ANS : select * from students where marks BETWEEN 60 AND 90;
+
+17. Find students who belong to Pune, Mumbai, or Delhi using IN.
+ANS : select * from students where city IN ('pune','mumbai','delhi');
+
+18. Find students whose names start with the letter 'A' using LIKE.
+ANS : select * from students where name LIKE '%A';
+
+19. Display students whose marks are greater than 50 using the WHERE clause.
+ANS : select * from students where marks > 50;
+
+20. Display all students sorted from highest marks to lowest marks using ORDER BY.
+ANS : select *  from students order by marks DESC;
+
+21. Find students whose marks are not equal to 50 using a comparison operator.
+ANS : select * from students where marks <> 50;
+
+22. Find students whose age is between 18 and 25 using BETWEEN.
+ANS : select * from students where age BETWEEN 18 AND 25;
+
+23. Display the first 5 students using LIMIT.
+ANS : select * from students LIMIT 5;
+
+24. Skip the first 5 students and display the next 5 using LIMIT and OFFSET.
+ANS : select * from students LIMIT 5 OFFSET 5;
+
+25. Find the total number of students using COUNT().
+ANS : Select COUNT(*) from students;
+
+26. Find the total marks of all students using SUM().
+ANS : Select sum(marks) from students;
+
+27. Find the average marks using AVG().
+ANS : Select AVG(marks) from students;
+
+28. Find the highest marks using MAX().
+ANS : Select MAX(marks) from students;
+
+29. Find the lowest marks using MIN().
+ANS : Select MIN(marks) from students;
+
+30.Find the total number of students who scored more than 75 marks using COUNT() and WHERE.
+ANS : Select COUNT(*) from students where marks > 75;
+
+31. The college wants to prepare a student report. Display the student names using the alias Student_Name.
+ANS : Select student_name AS Student_Name FROM students;
+
+32. The college wants to show the overall average marks. Display the result using the alias Average_Marks.
+ANS :  select AVG(marks) AS Average_marks from students;
+
+33. For a shorter query, use s as the alias for the students table and display student names and marks.
+ANS : select student_name, marks from students AS s;
+
+34. The college wants to store contact numbers. Add a phone column to the students table.
+ANS : alter table students ADD phone big int ; 
+
+35. Some student names are longer than expected. Increase student_name from VARCHAR(50) to VARCHAR(100).
+ANS : Alter table students Modify student_name varchar(100);
+
+36. The college wants a shorter column name. Rename student_name to name.
+ANS : alter table students RENAME column student_name TO name;
+
+37. Phone numbers are now stored elsewhere. Remove the phone column from the students table.
+ANS : alter table students drop column phone;
+
+38. The college wants to remove all student records but keep the table structure. Which command will you use? Write the query.
+ANS : Truncate table students; 
+
+39. The college completely stops using the student database table. Remove the entire table using the appropriate command.
+ANS : Drop table students;
+
+40. The college wants to ensure that a student's age is 18 or above. Add a CHECK constraint to the age column using ALTER TABLE.
+ANS : alter table student add check(age>=18);
+
+41. The college wants new students to have Pune as the default city. Add a DEFAULT value to the city column using ALTER TABLE.
+ANS : alter table add city varchar(15) default 'pune'; 
+
+42. The college wants to see all different cities where students live. Display the city names without duplicates using DISTINCT.
+ANS : select distinct city from students; 
+
+43. The college wants to know which different marks have been obtained by students. Display unique marks using DISTINCT.
+ANS :  select distinct marks from students; 
+
+44. Each student's email must be different. Add a UNIQUE constraint to the email column using ALTER TABLE.
+ANS : alter table student ADD email varchar(20) UNIQUE;
+
+45. A hospital has an old patients table. The hospital wants to remove all patient records but keep the table structure because new records will be added later.
+ANS : truncate table patients;
