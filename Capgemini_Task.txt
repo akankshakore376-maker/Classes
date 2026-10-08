@@ -1,0 +1,199 @@
+
+mysql> create database capgemini;
+Query OK, 1 row affected (0.05 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| batch              |
+| capgemini          |
+| company_db         |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+7 rows in set (0.01 sec)
+
+mysql> use capgemini;
+Database changed
+
+mysql> CREATE TABLE employee (id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(50) NOT NULL, profile VARCHAR(30) NOT NULL, email VARCHAR(100) NOT NULL UNIQUE, salary INT NOT NULL, age INT NOT NULL, experience INT NOT NULL);
+Query OK, 0 rows affected (0.09 sec)
+
+ INSERT INTO employee(name, profile, email, salary, age, experience)VALUES('rani', 'dev','rani@gmail.com', 11000, 43, 27),('raj', 'test', 'raj@gmail.com', 21000, 33, 17),('radha', 'test', 'radha@gmail.com', 26000, 38, 21),('raj', 'dev', 'raj2@gmail.com', 51000, 32, 12),('john', 'dev', 'john@gmail.com', 51000, 39, 27);
+Query OK, 5 rows affected (0.06 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| id         | int          | NO   | PRI | NULL    | auto_increment |
+| name       | varchar(50)  | NO   |     | NULL    |                |
+| profile    | varchar(30)  | NO   |     | NULL    |                |
+| email      | varchar(100) | NO   | UNI | NULL    |                |
+| salary     | int          | NO   |     | NULL    |                |
+| age        | int          | NO   |     | NULL    |                |
+| experience | int          | NO   |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+7 rows in set (0.00 sec)
+
+mysql> select * from employee;
++----+-------+---------+-----------------+--------+-----+------------+
+| id | name  | profile | email           | salary | age | experience |
++----+-------+---------+-----------------+--------+-----+------------+
+|  1 | rani  | dev     | rani@gmail.com  |  11000 |  43 |         27 |
+|  2 | raj   | test    | raj@gmail.com   |  21000 |  33 |         17 |
+|  3 | radha | test    | radha@gmail.com |  26000 |  38 |         21 |
+|  4 | raj   | dev     | raj2@gmail.com  |  51000 |  32 |         12 |
+|  5 | john  | dev     | john@gmail.com  |  51000 |  39 |         27 |
++----+-------+---------+-----------------+--------+-----+------------+
+5 rows in set (0.00 sec)
+
+mysql> Alter table employee ADD COLUMN branch_location varchar(20);
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++-----------------+--------------+------+-----+---------+----------------+
+| Field           | Type         | Null | Key | Default | Extra          |
++-----------------+--------------+------+-----+---------+----------------+
+| id              | int          | NO   | PRI | NULL    | auto_increment |
+| name            | varchar(50)  | NO   |     | NULL    |                |
+| profile         | varchar(30)  | NO   |     | NULL    |                |
+| email           | varchar(100) | NO   | UNI | NULL    |                |
+| salary          | int          | NO   |     | NULL    |                |
+| age             | int          | NO   |     | NULL    |                |
+| experience      | int          | NO   |     | NULL    |                |
+| branch_location | varchar(20)  | YES  |     | NULL    |                |
++-----------------+--------------+------+-----+---------+----------------+
+8 rows in set (0.00 sec)
+
+mysql> select SUM(salary) AS total_salary from employee;
++--------------+
+| total_salary |
++--------------+
+|       160000 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> select MAX(salary) from employee where profile='test';
++-------------+
+| MAX(salary) |
++-------------+
+|       26000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select AVG(experience) AS AVG_experience from employee;
++----------------+
+| AVG_experience |
++----------------+
+|        20.8000 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> select name from employee where salary=(select MAX(salary) from employee);
++------+
+| name |
++------+
+| raj  |
+| john |
++------+
+2 rows in set (0.00 sec)
+
+mysql> select name,experience from employee where salary=(select MIN(salary) from employee);
++------+------------+
+| name | experience |
++------+------------+
+| rani |         27 |
++------+------------+
+1 row in set (0.00 sec)
+
+mysql> select COUNT(*) AS Total_working from employee;
++---------------+
+| Total_working |
++---------------+
+|             5 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql>  SELECT name from employee WHERE profile = 'test' AND salary > 25000;
++-------+
+| name  |
++-------+
+| radha |
++-------+
+1 row in set (0.00 sec)
+
+mysql> UPDATE employee SET profile = 'support' WHERE name = 'Radha';
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee;
++----+-------+---------+-----------------+--------+-----+------------+-----------------+
+| id | name  | profile | email           | salary | age | experience | branch_location |
++----+-------+---------+-----------------+--------+-----+------------+-----------------+
+|  1 | rani  | dev     | rani@gmail.com  |  11000 |  43 |         27 | NULL            |
+|  2 | raj   | test    | raj@gmail.com   |  21000 |  33 |         17 | NULL            |
+|  3 | radha | support | radha@gmail.com |  26000 |  38 |         21 | NULL            |
+|  4 | raj   | dev     | raj2@gmail.com  |  51000 |  32 |         12 | NULL            |
+|  5 | john  | dev     | john@gmail.com  |  51000 |  39 |         27 | NULL            |
++----+-------+---------+-----------------+--------+-----+------------+-----------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT MAX(salary) AS second_highest_salary FROM employee WHERE salary < (SELECT MAX(salary) FROM employee);
++-----------------------+
+| second_highest_salary |
++-----------------------+
+|                 26000 |
++-----------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MIN(salary) AS second_lowest_salary FROM employee WHERE salary < (SELECT MIN(salary) FROM employee);
++----------------------+
+| second_lowest_salary |
++----------------------+
+|                 NULL |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MIN(salary) AS second_lowest_salary FROM employee WHERE salary > (SELECT MIN(salary) FROM employee);
++----------------------+
+| second_lowest_salary |
++----------------------+
+|                21000 |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> Select AVG(salary) AS average_salary FROM employee WHERE profile = 'dev';
++----------------+
+| average_salary |
++----------------+
+|     37666.6667 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> Select name, salary FROM employee WHERE experience = (SELECT MIN(experience) FROM employee);
++------+--------+
+| name | salary |
++------+--------+
+| raj  |  51000 |
++------+--------+
+1 row in set (0.00 sec)
+
+mysql> Select name from employee WHERE age = (SELECT MIN(age) FROM employee) AND salary = (SELECT MAX(salary) FROM employee);
++------+
+| name |
++------+
+| raj  |
++------+
+1 row in set (0.00 sec)
+
+mysql> DELETE FROM employee;
+Query OK, 5 rows affected (0.03 sec)
+
+mysql> select * from employee;
+Empty set (0.00 sec)
