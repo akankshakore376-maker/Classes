@@ -1,0 +1,78 @@
+#show the database
+show databases;
+
+#create the database
+create database Batch;
+
+#use database
+use Batch;
+
+#show all tables
+show tables;
+
+#Create the new table
+create table student(id int ,name varchar(15), city varchar(20), phoneNo big int, email varchar(30),subject varchar(20));
+
+#Insert data
+insert into student(id, name, city, phoneNo, email)values(101, 'Asha', 'Belagum', 9876543216, 'asha@gmail.com','SQL'),
+(102,'Sham','pune',7654890320,'sham@gmail.com','python'),(103,'Pinki','Surat',9844860514,'pinku@gmail.com','java'),(104,'Raju','Nashik',7844568904,'raaj@gmail.com','python'),(105,'Suma','pune',9867543219,'suma@gamil.com','AI'));
+
+#Describe table
+desc student;
+
+#show all data in table
+select * from student;
+
+#select particular column
+select city,name from student;
+
+#Update table data 
+update student set city='Mumbai' WHERE id=101;
+
+#Delete row 
+delete from student WHERE id=104;
+
+#primary key
+create table student(id int PRIMARY KEY ,name varchar(15), city varchar(20), phoneNo big int, email varchar(30),subject varchar(20));
+
+#NoTNULL
+create table student(id int PRIMARY KEY ,name varchar(15) NOT NULL, city varchar(20), phoneNo big int NOTNULL, email varchar(30),subject(20));
+
+#AND
+select * from student WHERE city='pune' AND subject='python';
+
+#OR
+select * from student WHERE city='Nashik' OR subject='java';
+
+#NOT
+select * from student WHERE NOT city='pune';
+
+#ALter add column
+alter table student ADD column marks int after city;
+
+#add multiple columns
+alter table student ADD column marks int ,ADD Fees int;
+
+#modify column datatype
+alter table student modify column age char;
+
+#Rename the column
+alter table student Rename column city to Address;
+
+#Rename table
+alter table student Rename student_Info;
+
+#Drop database
+drop database Batch1423;
+
+#Drop table
+drop table student;
+
+#Drop Column
+alter table student drop column gender;
+
+#Order BY Ascending
+select * from student order by id ASC;
+
+#oder BY Descending 
+select * from student order by id DESC;
