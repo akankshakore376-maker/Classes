@@ -1,0 +1,115 @@
+GROUP BY & HAVING : 
+
+GROUP BY is used to group rows having the same values in one or more columns.
+It is mainly used with aggregate functions like:
+COUNT()
+SUM()
+AVG()
+MAX()
+MIN()
+
+Query : select CourseName, Count(CourseName) as aaa from tkastd group by CourseName having avg(totalFees) >45000;
+
+ref Queries of Group by & having : 
+
+
+SELECT productName,SUM(Quantity) AS totalC FROM shop GROUP BY ProductName HAVING SUM(Quantity) >= 5 ;
+
+SELECT productName,SUM(Quantity) AS totalC FROM shop GROUP BY ProductName HAVING totalc > 5 AND  totalC < 7;
+
+ SELECT productName,SUM(Quantity) AS totalC FROM shop WHERE price >= 30000  GROUP BY ProductName;
+
+ SELECT productName,SUM(Quantity) AS totalC FROM shop GROUP BY ProductName ORDER BY totalC ASC; 
+
+
+with real world data : 
+
+Group by and Having clause : 
+
+WHERE	                  HAVING
+Filters rows           	  Filters groups
+Used before GROUP BY	  Used after GROUP BY
+Cannot use aggregate	  Can use aggregate
+
+
+refer this Queries : 
+
+CREATE TABLE employee (
+    emp_id INT,
+    emp_name VARCHAR(50),
+    department VARCHAR(50),
+    city VARCHAR(50),
+    salary INT
+);
+
+
+
+INSERT INTO employee VALUES
+(1, 'Amit', 'IT', 'Pune', 50000),
+(2, 'Rahul', 'IT', 'Mumbai', 60000),
+(3, 'Sneha', 'HR', 'Pune', 40000),
+(4, 'Pooja', 'HR', 'Mumbai', 45000),
+(5, 'Rohit', 'IT', 'Pune', 70000),
+(6, 'Neha', 'Sales', 'Delhi', 30000),
+(7, 'Karan', 'Sales', 'Delhi', 35000);
+
+
+
+
+
+
+Count employees in each department --> 
+
+SELECT department, COUNT(*) AS total_emp
+FROM employee
+GROUP BY department;
+
+
+
+Total salary per department --> 
+
+SELECT department, SUM(salary) AS total_salary
+FROM employee
+GROUP BY department;
+
+
+
+Employees count by department and city --> 
+
+SELECT department, city, COUNT(*) AS total
+FROM employee
+GROUP BY department, city;
+
+
+
+Departments with more than 2 employees --> 
+
+SELECT department, COUNT(*) AS total_emp
+FROM employee
+GROUP BY department
+HAVING COUNT(*) > 2;
+
+
+
+
+Departments with salary > 100000  -->
+
+SELECT department, SUM(salary) AS total_salary
+FROM employee
+GROUP BY department
+HAVING SUM(salary) > 100000;
+
+
+
+Pune employees grouped by department with salary > 50000 --> 
+
+SELECT department, SUM(salary) AS total_salary
+FROM employee
+WHERE city = 'Pune'
+GROUP BY department
+HAVING SUM(salary) > 50000;
+
+
+
+
+
